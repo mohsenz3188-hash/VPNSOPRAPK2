@@ -35,7 +35,6 @@ jobs:
         shell: bash
         run: |
           set -e
-
           SDKMANAGER="$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | sort -V | tail -n 1)"
 
           if [ ! -d "$ANDROID_HOME/platforms/android-35" ] || [ ! -d "$ANDROID_HOME/build-tools/35.0.0" ]; then
@@ -62,6 +61,42 @@ jobs:
           unzip -q VPNSOPR-Android-Complete.zip -d build-source
           test -f build-source/VPNSOPR-Android/settings.gradle.kts
           test -f build-source/VPNSOPR-Android/app/build.gradle.kts
+
+      - name: Fix sing-box route prefixes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path(
+              "build-source/VPNSOPR-Android/app/src/main/java/com/vpnsopr/client/LibboxProxyFactory.kt"
+          )
+
+          if not path.is_file():
+              raise SystemExit("LibboxProxyFactory.kt not found")
+
+          source = path.read_text()
+
+          replacements = {
+              "IpPrefix(route4.next())":
+                  "route4.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
+              "IpPrefix(route6.next())":
+                  "route6.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
+              "IpPrefix(exclude4.next())":
+                  "exclude4.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
+              "IpPrefix(exclude6.next())":
+                  "exclude6.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
+          }
+
+          for old, new in replacements.items():
+              if old in source:
+                  source = source.replace(old, new)
+              elif new not in source:
+                  raise SystemExit("Unexpected source code: " + old)
+
+          path.write_text(source)
+          print("Route prefix compatibility patch applied successfully")
+          PY
 
       - name: Build Debug APK
         working-directory: build-source/VPNSOPR-Android
