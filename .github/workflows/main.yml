@@ -51,6 +51,46 @@ jobs:
           unzip -q VPNSOPR-Android-Complete.zip -d build-source
           test -f build-source/VPNSOPR-Android/settings.gradle.kts
 
+      - name: Upgrade sing-box engine to 1.14.4
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          project = Path("build-source/VPNSOPR-Android")
+          pattern = re.compile(
+              r'((?:[A-Za-z0-9_.-]+:)*libbox:)[0-9][A-Za-z0-9.+_-]*'
+          )
+
+          changed = []
+
+          for path in project.rglob("*"):
+              if not path.is_file():
+                  continue
+
+              if path.suffix not in {".gradle", ".kts", ".toml"}:
+                  continue
+
+              source = path.read_text()
+              updated, count = pattern.subn(
+                  r"\g<1>1.14.4",
+                  source
+              )
+
+              if count:
+                  path.write_text(updated)
+                  changed.append(str(path))
+
+          if not changed:
+              raise SystemExit(
+                  "ERROR: libbox dependency was not found. "
+                  "Check the Gradle dependency."
+              )
+
+          print("libbox upgraded to 1.14.4")
+          print(changed)
+          PY
+
       - name: Enable Android Go stack compatibility
         run: |
           python3 - <<'PY'
@@ -202,4 +242,3 @@ jobs:
           path: build-source/VPNSOPR-Android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
-          
