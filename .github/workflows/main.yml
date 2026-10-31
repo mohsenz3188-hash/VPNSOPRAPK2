@@ -22,86 +22,122 @@ jobs:
       ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Java 17
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
       - name: Install Android SDK
-        shell: bash
         run: |
           set -e
           SDKMANAGER="$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | sort -V | tail -n 1)"
-
-          if [ ! -d "$ANDROID_HOME/platforms/android-35" ] || [ ! -d "$ANDROID_HOME/build-tools/35.0.0" ]; then
-            test -x "$SDKMANAGER"
+          if [ ! -d "$ANDROID_HOME/platforms/android-35" ]; then
             set +o pipefail
             yes | "$SDKMANAGER" --sdk_root="$ANDROID_HOME" --licenses
             yes | "$SDKMANAGER" --sdk_root="$ANDROID_HOME" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
           fi
-
-          test -d "$ANDROID_HOME/platforms/android-35"
-          test -d "$ANDROID_HOME/build-tools/35.0.0"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
-      - name: Check source archive
-        run: |
-          test -f VPNSOPR-Android-Complete.zip
-
-      - name: Extract Android project
+      - name: Extract project
         run: |
           unzip -q VPNSOPR-Android-Complete.zip -d build-source
           test -f build-source/VPNSOPR-Android/settings.gradle.kts
-          test -f build-source/VPNSOPR-Android/app/build.gradle.kts
 
-      - name: Fix sing-box route prefixes
-        shell: bash
+      - name: Fix route prefixes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("build-source/VPNSOPR-Android/app/src/main/java/com/vpnsopr/client/LibboxProxyFactory.kt")
+          s = p.read_text()
+          replacements = {
+              "IpPrefix(route4.next())": "route4.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
+              "IpPrefix(route6.next())": "route6.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
+              "IpPrefix(exclude4.next())": "exclude4.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
+              "IpPrefix(exclude6.next())": "exclude6.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
+          }
+          for old, new in replacements.items():
+              if old in s:
+                  s = s.replace(old, new)
+              elif new not in s:
+                  raise SystemExit("Route patch failed: " + old)
+          p.write_text(s)
+          PY
+
+      - name: Add VPN error diagnostics
         run: |
           python3 - <<'PY'
           from pathlib import Path
 
-          path = Path(
-              "build-source/VPNSOPR-Android/app/src/main/java/com/vpnsopr/client/LibboxProxyFactory.kt"
+          root = Path("build-source/VPNSOPR-Android/app/src/main/java/com/vpnsopr/client")
+
+          main_path = root / "MainActivity.kt"
+          main = main_path.read_text()
+
+          if "import android.util.Log" not in main:
+              main = main.replace("import android.os.Looper", "import android.os.Looper\nimport android.util.Log")
+
+          old = (
+              '        ContextCompat.startForegroundService(this, intent)\n'
+              '        getSharedPreferences("vpnsopr_runtime", MODE_PRIVATE).edit().putString("state", "CONNECTING").apply()\n'
+              '        updateWebState("CONNECTING", "در حال اتصال")'
           )
 
-          if not path.is_file():
-              raise SystemExit("LibboxProxyFactory.kt not found")
+          new = (
+              '        try {\n'
+              '            ContextCompat.startForegroundService(this, intent)\n'
+              '            getSharedPreferences("vpnsopr_runtime", MODE_PRIVATE).edit().putString("state", "CONNECTING").apply()\n'
+              '            updateWebState("CONNECTING", "در حال اتصال")\n'
+              '        } catch (error: Throwable) {\n'
+              '            Log.e("VPNSOPR", "Unable to start VPN service", error)\n'
+              '            val detail = (error.localizedMessage ?: error.javaClass.simpleName).take(180)\n'
+              '            getSharedPreferences("vpnsopr_runtime", MODE_PRIVATE).edit().putString("state", "ERROR").putString("message", detail).apply()\n'
+              '            updateWebState("ERROR", detail)\n'
+              '            showToast("خطای شروع VPN: $detail")\n'
+              '        }'
+          )
 
-          source = path.read_text()
+          if old not in main:
+              raise SystemExit("MainActivity patch failed")
+          main_path.write_text(main.replace(old, new, 1))
 
-          replacements = {
-              "IpPrefix(route4.next())":
-                  "route4.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
-              "IpPrefix(route6.next())":
-                  "route6.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
-              "IpPrefix(exclude4.next())":
-                  "exclude4.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
-              "IpPrefix(exclude6.next())":
-                  "exclude6.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
-          }
+          service_path = root / "VPNSoprVpnService.kt"
+          service = service_path.read_text()
 
-          for old, new in replacements.items():
-              if old in source:
-                  source = source.replace(old, new)
-              elif new not in source:
-                  raise SystemExit("Unexpected source code: " + old)
+          old = (
+              '        startForeground(NOTIFICATION_ID, buildNotification("در حال آماده‌سازی اتصال…"))\n'
+              '        publishState("CONNECTING", "در حال اتصال به سرور")'
+          )
 
-          path.write_text(source)
-          print("Route prefix compatibility patch applied successfully")
+          new = (
+              '        try {\n'
+              '            startForeground(NOTIFICATION_ID, buildNotification("در حال آماده‌سازی اتصال…"))\n'
+              '        } catch (error: Throwable) {\n'
+              '            Log.e(TAG, "Unable to enter foreground", error)\n'
+              '            val detail = (error.localizedMessage ?: error.javaClass.simpleName).take(180)\n'
+              '            publishState("ERROR", detail)\n'
+              '            stopSelf(startId)\n'
+              '            return START_NOT_STICKY\n'
+              '        }\n'
+              '        publishState("CONNECTING", "در حال اتصال به سرور")'
+          )
+
+          if old not in service:
+              raise SystemExit("VPN service patch failed")
+          service_path.write_text(service.replace(old, new, 1))
+          print("VPN diagnostics installed")
           PY
 
-      - name: Build Debug APK
+      - name: Build APK
         working-directory: build-source/VPNSOPR-Android
-        run: |
-          gradle --no-daemon --stacktrace :app:assembleDebug
+        run: gradle --no-daemon --stacktrace :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
