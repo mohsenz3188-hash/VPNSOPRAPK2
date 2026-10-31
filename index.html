@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-container-high": "#292a2f", "on-tertiary-fixed-variant": "#095300", "on-secondary-container": "#d0a6ff", "tertiary-fixed": "#79ff5b", "on-primary-fixed": "#00201a", "secondary": "#dbb8ff", "inverse-surface": "#e3e1e9", "secondary-fixed-dim": "#dbb8ff", "tertiary": "#e4ffd6", "secondary-fixed": "#efdbff", "on-primary-fixed-variant": "#005144", "on-tertiary-container": "#106f00", "on-background": "#e3e1e9", "on-tertiary-fixed": "#022100", "error-container": "#93000a", "surface-variant": "#34343a", "surface-dim": "#121318", "on-error-container": "#ffdad6", "on-error": "#690005", "inverse-primary": "#006b5b", "error": "#ffb4ab", "surface": "#121318", "on-secondary": "#470083", "on-surface-variant": "#b9cac4", "surface-container-highest": "#34343a", "on-tertiary": "#053900", "tertiary-fixed-dim": "#2ae500", "surface-container-low": "#1a1b21", "surface-container-lowest": "#0d0e13", "primary": "#d7fff3", "outline": "#83948f", "inverse-on-surface": "#2f3036", "secondary-container": "#6807ba", "tertiary-container": "#34fc0d", "surface-container": "#1e1f25", "on-secondary-fixed-variant": "#6600b7", "on-secondary-fixed": "#2b0052", "on-surface": "#e3e1e9", "primary-container": "#00f5d4", "on-primary": "#00382f", "on-primary-container": "#006c5c", "outline-variant": "#3a4a46", "surface-tint": "#00dfc1", "surface-bright": "#38393f", "background": "#121318", "primary-fixed-dim": "#00dfc1", "primary-fixed": "#26fedc" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "2rem", "space-sm": "0.5rem", "margin-desktop": "2rem", "space-xs": "0.25rem", "gutter-sm": "0.75rem", "space-2xl": "3rem", "gutter": "1rem", "space-lg": "1.5rem", "space-md": "1rem", "margin": "1rem" }, fontFamily: { "mono-md": ["JetBrains Mono"], "headline-xl-mobile": ["Space Grotesk"], "mono-lg": ["JetBrains Mono"], "body-md": ["Inter"], "headline-lg": ["Space Grotesk"], "headline-xl": ["Space Grotesk"], "body-sm": ["Inter"], "mono-sm": ["JetBrains Mono"], "label-caps": ["JetBrains Mono"], "body-lg": ["Inter"], "headline-md": ["Space Grotesk"] }, fontSize: { "mono-md": ["13px", { lineHeight: "18px", fontWeight: "500" }], "headline-xl-mobile": ["28px", { lineHeight: "36px", fontWeight: "700" }], "mono-lg": ["16px", { lineHeight: "22px", fontWeight: "500" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-lg": ["24px", { lineHeight: "32px", fontWeight: "600" }], "headline-xl": ["36px", { lineHeight: "44px", fontWeight: "700" }], "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }], "mono-sm": ["11px", { lineHeight: "14px", fontWeight: "500" }], "label-caps": ["10px", { lineHeight: "12px", letterSpacing: "0.08em", fontWeight: "700" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;"></head><body class="bg-background font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="VPNSOPR Cyberpunk Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKzyFQ189niUEudoioMcNnZAJ6LW-6sQSVDzEYbWPXDQaDuds9A40nxMnag6wdjFnR2I9_BchZJs2Zvdbmtiel3oqmyWuID347zCKaEHzhtqVtPSbchCgBOFBfvLgB4zE150xOj6_l0JoL2m9-rLb4KJqB4g52PyvRYZPK8MkHiSzjJLhE9jKtE1uGn0ORu0z9JE2IvEZAV-dyyx7xCe2QRT3MX9Z_LJLLxV6af-E"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-wider text-primary-container [text-shadow:0_0_12px_rgba(0,245,212,0.45)]">VPNSOPR</span><span class="font-mono-sm text-mono-sm px-space-xs py-[2px] bg-secondary-container text-on-secondary-container rounded-DEFAULT">RULE</span></div><span class="font-mono-sm text-mono-sm text-on-surface-variant truncate uppercase tracking-wider">Subscriptions</span></div></div><div class="flex items-center gap-space-sm flex-shrink-0"><span class="font-label-caps text-label-caps uppercase px-space-xs py-[3px] bg-surface-container-high text-primary-fixed border border-primary-fixed/30 rounded-DEFAULT shadow-[0_0_10px_rgba(0,245,212,0.15)]">TUN MODE</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 bg-background pb-28"><div class="flex flex-col w-full px-margin pb-6 gap-space-lg">
+<!-- Top Telemetry Banner & Visual Branding Anchor -->
+<div class="relative w-full rounded-xl bg-surface-container-low p-space-md shadow-xl overflow-hidden mt-2">
+<div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-primary-container/10 blur-2xl pointer-events-none"></div>
+<div class="absolute -left-8 -bottom-8 w-36 h-36 rounded-full bg-secondary-container/20 blur-2xl pointer-events-none"></div>
+<div class="relative flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative flex-shrink-0 w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center shadow-[0_0_15px_rgba(0,245,212,0.2)]">
+<svg class="w-6 h-6 text-primary-container" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M12 2L4 5v6.5c0 5 3.4 9.5 8 10.5 4.6-1 8-5.5 8-10.5V5l-8-3z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M9 11.5l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-tertiary-container shadow-[0_0_8px_#34fc0d]"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-md text-headline-md tracking-tight text-on-surface truncate">CYBER-PRO VIP</span>
+<span class="font-label-caps text-label-caps px-1.5 py-0.5 rounded-DEFAULT bg-primary-container/15 text-primary-fixed shadow-[0_0_8px_rgba(0,245,212,0.3)]">SYNCED</span>
+</div>
+<p class="font-mono-sm text-mono-sm text-on-surface-variant truncate">PROVIDER: HYPERION NODE NET [V2X]</p>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0">
+<span class="font-label-caps text-label-caps text-on-surface-variant">SECURE HASH</span>
+<span class="font-mono-sm text-mono-sm text-secondary-fixed tracking-wider">#HYP-9942</span>
+</div>
+</div>
+</div>
+<!-- Primary Active Subscription Bento Card -->
+<div class="relative w-full rounded-xl bg-surface-container-low p-space-md shadow-xl flex flex-col gap-space-md overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary-container">wifi_tethering</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface tracking-wider">Quota Telemetry</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-DEFAULT bg-surface-container-high">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-mono-sm text-mono-sm text-tertiary">22 DAYS LEFT</span>
+</div>
+</div>
+<!-- Bandwidth Bar & Metrics -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-xl-mobile text-headline-xl-mobile text-primary-fixed tracking-tight">68.4</span>
+<span class="font-mono-md text-mono-md text-on-surface-variant">/ 200 GB</span>
+</div>
+<div class="text-right">
+<span class="font-mono-sm text-mono-sm text-secondary-fixed">131.6 GB FREE</span>
+</div>
+</div>
+<!-- Dual Tone Glowing Track -->
+<div class="w-full h-3 rounded-full bg-surface-container-highest overflow-hidden p-0.5 shadow-inner">
+<div class="h-full rounded-full bg-gradient-to-r from-primary-container via-secondary-fixed-dim to-secondary-container shadow-[0_0_12px_rgba(0,245,212,0.6)]" style="width: 34.2%;"></div>
+</div>
+<div class="flex items-center justify-between font-mono-sm text-mono-sm text-on-surface-variant pt-1">
+<span>Cycle Usage: 34.2%</span>
+<span>Renewal: Apr 18, 2025</span>
+</div>
+</div>
+<!-- Quick Action Bar -->
+<div class="grid grid-cols-3 gap-space-xs pt-1">
+<button class="flex flex-col items-center justify-center gap-1 py-2.5 px-1 rounded-lg bg-surface-container hover:bg-surface-container-high active:scale-95 transition-all text-primary-container group" id="syncNowBtn">
+<span class="material-symbols-outlined text-[20px] group-hover:rotate-180 transition-transform duration-500" id="syncIcon">sync</span>
+<span class="font-mono-sm text-mono-sm uppercase text-on-surface tracking-wider">Sync Now</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-2.5 px-1 rounded-lg bg-surface-container hover:bg-surface-container-high active:scale-95 transition-all text-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span class="font-mono-sm text-mono-sm uppercase text-on-surface tracking-wider">Renew Plan</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-2.5 px-1 rounded-lg bg-surface-container hover:bg-surface-container-high active:scale-95 transition-all text-primary" id="shareLinkBtn">
+<span class="material-symbols-outlined text-[20px]">ios_share</span>
+<span class="font-mono-sm text-mono-sm uppercase text-on-surface tracking-wider">Share Link</span>
+</button>
+</div>
+<div class="hidden items-center justify-center gap-2 py-1.5 px-3 rounded-DEFAULT bg-secondary-container text-on-secondary-container font-mono-sm text-mono-sm text-center" id="toastNotification">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span id="toastMessage">Encrypted link copied to clipboard</span>
+</div>
+</div>
+<!-- Weekly Bandwidth Analytics Chart -->
+<div class="w-full rounded-xl bg-surface-container-low p-space-md shadow-xl flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">bar_chart</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface tracking-wider">Traffic Distribution (Weekly)</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-primary-container">AVG 9.77 GB/D</span>
+</div>
+<!-- Mini Bar Chart Visualizer -->
+<div class="flex items-end justify-between h-28 pt-4 px-1 gap-2">
+<!-- Mon -->
+<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+<div class="w-full rounded-DEFAULT bg-primary-container/20 group-hover:bg-primary-container transition-all relative" style="height: 48%;">
+<span class="hidden group-hover:block absolute -top-5 left-1/2 -translate-x-1/2 font-mono-sm text-mono-sm text-primary-container">6.2G</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">M</span>
+</div>
+<!-- Tue -->
+<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+<div class="w-full rounded-DEFAULT bg-primary-container/30 group-hover:bg-primary-container transition-all relative" style="height: 65%;">
+<span class="hidden group-hover:block absolute -top-5 left-1/2 -translate-x-1/2 font-mono-sm text-mono-sm text-primary-container">8.4G</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">T</span>
+</div>
+<!-- Wed -->
+<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+<div class="w-full rounded-DEFAULT bg-primary-container/45 group-hover:bg-primary-container transition-all relative" style="height: 82%;">
+<span class="hidden group-hover:block absolute -top-5 left-1/2 -translate-x-1/2 font-mono-sm text-mono-sm text-primary-container">11.1G</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">W</span>
+</div>
+<!-- Thu -->
+<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+<div class="w-full rounded-DEFAULT bg-primary-container/35 group-hover:bg-primary-container transition-all relative" style="height: 55%;">
+<span class="hidden group-hover:block absolute -top-5 left-1/2 -translate-x-1/2 font-mono-sm text-mono-sm text-primary-container">7.0G</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">T</span>
+</div>
+<!-- Fri (Peak) -->
+<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+<div class="w-full rounded-DEFAULT bg-primary-container shadow-[0_0_12px_rgba(0,245,212,0.5)] relative" style="height: 100%;">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 font-mono-sm text-mono-sm text-primary-container font-bold">14.8G</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-primary-container font-bold">F</span>
+</div>
+<!-- Sat -->
+<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+<div class="w-full rounded-DEFAULT bg-primary-container/50 group-hover:bg-primary-container transition-all relative" style="height: 72%;">
+<span class="hidden group-hover:block absolute -top-5 left-1/2 -translate-x-1/2 font-mono-sm text-mono-sm text-primary-container">9.8G</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">S</span>
+</div>
+<!-- Sun -->
+<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+<div class="w-full rounded-DEFAULT bg-primary-container/70 group-hover:bg-primary-container transition-all relative" style="height: 85%;">
+<span class="hidden group-hover:block absolute -top-5 left-1/2 -translate-x-1/2 font-mono-sm text-mono-sm text-primary-container">11.5G</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">S</span>
+</div>
+</div>
+</div>
+<!-- Subscription Settings & Automation Control Panel -->
+<div class="w-full rounded-xl bg-surface-container-low p-space-md shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary-fixed">tune</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface tracking-wider">Automation &amp; Logic</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">v2rayNG Core 5.38</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Toggle Row 1 -->
+<div class="flex items-center justify-between py-2 px-space-sm rounded-lg bg-surface-container">
+<div class="flex flex-col min-w-0 pr-2">
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Auto-update on App Launch</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">Sync configs immediately when launched</span>
+</div>
+<button class="toggle-switch relative w-11 h-6 rounded-full bg-primary-container flex-shrink-0 transition-colors p-0.5" data-state="true" type="button">
+<span class="dot block w-5 h-5 rounded-full bg-surface-container-lowest translate-x-5 transition-transform shadow-[0_0_8px_rgba(0,245,212,0.8)]"></span>
+</button>
+</div>
+<!-- Toggle Row 2 -->
+<div class="flex items-center justify-between py-2 px-space-sm rounded-lg bg-surface-container">
+<div class="flex flex-col min-w-0 pr-2">
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Update Interval</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">Recurring background poll: Every 6 Hours</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded-DEFAULT">
+<span class="font-mono-sm text-mono-sm text-primary-container font-bold">6H</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Toggle Row 3 -->
+<div class="flex items-center justify-between py-2 px-space-sm rounded-lg bg-surface-container">
+<div class="flex flex-col min-w-0 pr-2">
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Filter Invalid / Offline Nodes</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">Auto-purge endpoints with ping &gt; 999ms</span>
+</div>
+<button class="toggle-switch relative w-11 h-6 rounded-full bg-primary-container flex-shrink-0 transition-colors p-0.5" data-state="true" type="button">
+<span class="dot block w-5 h-5 rounded-full bg-surface-container-lowest translate-x-5 transition-transform shadow-[0_0_8px_rgba(0,245,212,0.8)]"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- Subscription Profiles & Extra Endpoints List -->
+<div class="w-full flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed">layers</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface tracking-wider">Profiles &amp; Fallback Feeds</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">2 PROFILES CONFIGURED</span>
+</div>
+<!-- Active Profile Mini Card -->
+<div class="w-full rounded-xl bg-surface-container-low p-space-md shadow-lg flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-2.5 h-10 rounded-full bg-primary-container shadow-[0_0_10px_rgba(0,245,212,0.6)] flex-shrink-0"></div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-headline-md text-on-surface truncate">CYBER-PRO VIP SUB</span>
+<span class="material-symbols-outlined text-[14px] text-primary-container">verified</span>
+</div>
+<p class="font-mono-sm text-mono-sm text-on-surface-variant truncate">48 Nodes · VLESS/Trojan · Auto-Sync On</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs flex-shrink-0">
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Backup Profile Mini Card -->
+<div class="w-full rounded-xl bg-surface-container-low p-space-md shadow-lg flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-2.5 h-10 rounded-full bg-surface-variant flex-shrink-0"></div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-headline-md text-on-surface truncate">Backup Free Nodes</span>
+<span class="font-label-caps text-label-caps px-1 py-0.5 rounded-DEFAULT bg-surface-container-high text-on-surface-variant">STANDBY</span>
+</div>
+<p class="font-mono-sm text-mono-sm text-on-surface-variant truncate">12 Nodes · Updated 3 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs flex-shrink-0">
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Add New Subscription Action Container -->
+<div class="w-full rounded-xl bg-surface-container p-space-md flex flex-col gap-space-sm shadow-md">
+<label class="font-label-caps text-label-caps text-primary-fixed uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">add_link</span>
+        Import Subscription Profile
+      </label>
+<div class="flex items-center gap-space-xs">
+<div class="relative flex-1 min-w-0">
+<input class="w-full h-10 bg-surface-container-lowest px-3 rounded-lg font-mono-sm text-mono-sm text-primary placeholder-outline focus:outline-none shadow-inner" id="subInput" placeholder="vless://, vmess://, trojan://, ss:// or HTTPS subscription URL..." type="text"/>
+</div>
+<button class="h-10 px-4 rounded-lg bg-primary-container text-on-primary-container font-mono-md text-mono-md font-bold flex items-center gap-1 active:scale-95 transition-transform flex-shrink-0 shadow-[0_0_12px_rgba(0,245,212,0.4)]" id="addFeedBtn">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interactions
+  const syncBtn = document.getElementById('syncNowBtn');
+  const syncIcon = document.getElementById('syncIcon');
+  const shareBtn = document.getElementById('shareLinkBtn');
+  const toast = document.getElementById('toastNotification');
+  const toastMsg = document.getElementById('toastMessage');
+  const addFeedBtn = document.getElementById('addFeedBtn');
+  const subInput = document.getElementById('subInput');
+
+  function showToast(msg) {
+    if (!toast) return;
+    toastMsg.textContent = msg;
+    toast.classList.remove('hidden');
+    toast.classList.add('flex');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+      toast.classList.remove('flex');
+    }, 2800);
+  }
+
+  if (syncBtn && syncIcon) {
+    syncBtn.addEventListener('click', () => {
+      syncIcon.classList.add('animate-spin');
+      showToast('Contacting Hyperion Node API... Synced!');
+      setTimeout(() => {
+        syncIcon.classList.remove('animate-spin');
+      }, 1500);
+    });
+  }
+
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      showToast('Encrypted sub:// link copied to clipboard');
+    });
+  }
+
+  if (addFeedBtn && subInput) {
+    addFeedBtn.addEventListener('click', () => {
+      if (subInput.value.trim().length > 0) {
+        showToast('Validating & importing profile feed...');
+        subInput.value = '';
+      } else {
+        showToast('Please insert a valid subscription URL');
+      }
+    });
+  }
+
+  // Handle interactive toggle switches
+  document.querySelectorAll('.toggle-switch').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const isChecked = toggle.getAttribute('data-state') === 'true';
+      const newState = !isChecked;
+      toggle.setAttribute('data-state', String(newState));
+      const dot = toggle.querySelector('.dot');
+      
+      if (newState) {
+        toggle.classList.remove('bg-surface-variant');
+        toggle.classList.add('bg-primary-container');
+        dot.classList.remove('translate-x-0');
+        dot.classList.add('translate-x-5');
+      } else {
+        toggle.classList.remove('bg-primary-container');
+        toggle.classList.add('bg-surface-variant');
+        dot.classList.remove('translate-x-5');
+        dot.classList.add('translate-x-0');
+      }
+    });
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.6)]" data-active-classes="text-primary-container [filter:drop-shadow(0_0_10px_rgba(0,245,212,0.6))]"><div class="flex items-center justify-around h-20 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-space-xs text-on-surface-variant transition-colors hover:text-on-surface" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">bolt</span><span class="font-mono-sm text-mono-sm tracking-wider uppercase">Home</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-space-xs text-on-surface-variant transition-colors hover:text-on-surface" data-path="configs" href="#"><span class="material-symbols-outlined text-[24px]">layers</span><span class="font-mono-sm text-mono-sm tracking-wider uppercase">Configs</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-space-xs transition-colors text-primary-container [filter:drop-shadow(0_0_10px_rgba(0,245,212,0.6))]" data-path="subscriptions" href="#"><span class="material-symbols-outlined text-[24px]">cloud_sync</span><span class="font-mono-sm text-mono-sm tracking-wider uppercase">Subs</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-space-xs text-on-surface-variant transition-colors hover:text-on-surface" data-path="settings" href="#"><span class="material-symbols-outlined text-[24px]">tune</span><span class="font-mono-sm text-mono-sm tracking-wider uppercase">Settings</span></a></div></nav><script src="../app-bridge.js"></script></body></html>

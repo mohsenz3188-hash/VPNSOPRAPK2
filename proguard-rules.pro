@@ -1,0 +1,3 @@
+-keep class io.nekohasekai.libbox.** { *; }
+-keep interface io.nekohasekai.libbox.** { *; }
+-keepclasseswithmembers class * { native <methods>; }
