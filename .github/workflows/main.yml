@@ -51,23 +51,73 @@ jobs:
           unzip -q VPNSOPR-Android-Complete.zip -d build-source
           test -f build-source/VPNSOPR-Android/settings.gradle.kts
 
+      - name: Enable Android Go stack compatibility
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          project = Path("build-source/VPNSOPR-Android")
+          matches = list(project.rglob("VPNSoprApplication.kt"))
+
+          if len(matches) != 1:
+              raise SystemExit(
+                  "Expected exactly one VPNSoprApplication.kt; "
+                  f"found {len(matches)}"
+              )
+
+          path = matches[0]
+          source = path.read_text()
+
+          if "fixAndroidStack" not in source:
+              pattern = re.compile(r"(?m)^(\s*)(it\.)?tempPath\s*=.*$")
+              match = pattern.search(source)
+
+              if not match:
+                  raise SystemExit("SetupOptions.tempPath not found")
+
+              indent = match.group(1)
+              receiver = match.group(2) or ""
+
+              setting = (
+                  f"{indent}{receiver}fixAndroidStack = "
+                  "android.os.Build.VERSION.SDK_INT >= "
+                  "android.os.Build.VERSION_CODES.P"
+              )
+
+              source = (
+                  source[:match.end()]
+                  + "\n"
+                  + setting
+                  + source[match.end():]
+              )
+
+              path.write_text(source)
+
+          print("Android stack compatibility enabled")
+          PY
+
       - name: Fix route prefixes
         run: |
           python3 - <<'PY'
           from pathlib import Path
+
           p = Path("build-source/VPNSOPR-Android/app/src/main/java/com/vpnsopr/client/LibboxProxyFactory.kt")
           s = p.read_text()
+
           replacements = {
               "IpPrefix(route4.next())": "route4.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
               "IpPrefix(route6.next())": "route6.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
               "IpPrefix(exclude4.next())": "exclude4.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
               "IpPrefix(exclude6.next())": "exclude6.next().let { p -> IpPrefix(java.net.InetAddress.getByName(p.address()), p.prefix()) }",
           }
+
           for old, new in replacements.items():
               if old in s:
                   s = s.replace(old, new)
               elif new not in s:
                   raise SystemExit("Route patch failed: " + old)
+
           p.write_text(s)
           PY
 
@@ -82,7 +132,10 @@ jobs:
           main = main_path.read_text()
 
           if "import android.util.Log" not in main:
-              main = main.replace("import android.os.Looper", "import android.os.Looper\nimport android.util.Log")
+              main = main.replace(
+                  "import android.os.Looper",
+                  "import android.os.Looper\nimport android.util.Log"
+              )
 
           old = (
               '        ContextCompat.startForegroundService(this, intent)\n'
@@ -106,6 +159,7 @@ jobs:
 
           if old not in main:
               raise SystemExit("MainActivity patch failed")
+
           main_path.write_text(main.replace(old, new, 1))
 
           service_path = root / "VPNSoprVpnService.kt"
@@ -131,7 +185,9 @@ jobs:
 
           if old not in service:
               raise SystemExit("VPN service patch failed")
+
           service_path.write_text(service.replace(old, new, 1))
+
           print("VPN diagnostics installed")
           PY
 
